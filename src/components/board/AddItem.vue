@@ -59,9 +59,13 @@ export default {
     },
     methods:{
         addItem(){
-            this.newItem.name = 'unknown'
+            this.newItem.name = 'unknown';
+            this.newItem.email = 'unknown';
             if (this.user.displayName) {
                 this.newItem.name = this.user.displayName
+            }
+            if (this.user.email) {
+                this.newItem.email = this.user.email
             }
 
             this.$firebaseRefs.items.push(this.newItem);

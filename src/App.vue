@@ -2,10 +2,10 @@
   <div id="app">
     <header>
       <ul>
-        <li><router-link class="btn" to="/">Home</router-link></li>
-        <li><router-link class="btn" to="/list">글목록</router-link></li>
+        <li><router-link :to="{ name : 'hello' }" class="btn">Home</router-link></li>
+        <li><router-link :to="{ name : 'List' }" class="btn">글목록</router-link></li>
         <li>
-          <router-link v-if="!user" class="btn" to="/auth">로그인</router-link>
+          <router-link v-if="!user" :to="{ name : 'auth' }" class="btn" >로그인</router-link>
           <button v-else class="btn" @click="logOut">로그아웃</button>
         </li>
       </ul>
@@ -44,6 +44,8 @@ header li .btn{display:inline-block;line-height:16px;font-size:16px;color: #000;
 body {
   margin: 0;
 }
+.table th, .table td{vertical-align: middle}
+p{margin: 0;padding: 0;}
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

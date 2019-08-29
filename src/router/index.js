@@ -10,6 +10,7 @@ import Auth from '@/components/Auth'
 import AddItem from '@/components/board/AddItem'
 import EditItem from '@/components/board/EditItem'
 import ListItem from '@/components/board/ListItem'
+import ViewItem from '@/components/board/ViewItem'
 
 Vue.use(Router)
 
@@ -17,6 +18,7 @@ var routes = [
     { path: '/', name: 'hello', component: Hello },
     { path: '/auth', name: 'auth', component: Auth, meta: { guestOnly: true } },
     { path: '/add', name: 'Add', component: AddItem, meta: { requireAuth: true}},
+    { path: '/view/:id', name: 'View', component: ViewItem },
     { path: '/edit/:id', name: 'Edit', component: EditItem },
     { path: '/list', name: 'List', component: ListItem },
     { path: '*', redirect: '/hello' }

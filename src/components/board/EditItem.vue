@@ -15,7 +15,7 @@
                         <label>내용</label>
                         <textarea class="form-control" v-model="newItem.content"></textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="text-align:right;">
                         <button type="submit" class="btn btn-warning">글수정</button>
                         <router-link class="btn btn-secondary" to="/list">글목록</router-link>
                     </div>
@@ -26,6 +26,7 @@
 </template>
 <script>
 import {db} from '@/auth'
+import {mapGetters} from 'vuex'
 
 export default {
     components:{
@@ -42,6 +43,11 @@ export default {
     firebase: {
         items: db.ref('items')
     },
+    computed: {
+        ...mapGetters({
+            user: 'user/user'
+        })
+    },
     created() {
         this.$firebaseRefs.items.child(this.$route.params.id).once("value", snapshot => {
             let {title, content} = snapshot.val();
@@ -53,9 +59,16 @@ export default {
     },
     methods: {
         updateItem() {
+            this.newItem.name = 'unknown'
+            if (this.user.displayName) {
+                this.newItem.name = this.user.displayName
+            }
+            if (this.user.email) {
+                this.newItem.email = this.user.email
+            }
             this.$firebaseRefs.items.child(this.$route.params.id).set(this.newItem);
             this.$router.push('/list')
         }
-    }
+    },
 }
 </script>
